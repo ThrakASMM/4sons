@@ -108,6 +108,40 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('next-question').style.display = 'none';
     }
 
+    function freezeScreenOnError() {
+    document.getElementById('next-question').style.display = 'none';
+    const optionsDiv = document.getElementById('options');
+    optionsDiv.innerHTML = ''; 
+    
+    const correctAnswerDisplay = document.createElement('p');
+    correctAnswerDisplay.textContent = `Bonne réponse : ${correctAnswer}`;
+    correctAnswerDisplay.style.color = 'blue';
+    correctAnswerDisplay.style.fontWeight = 'bold';
+    optionsDiv.appendChild(correctAnswerDisplay);
+    
+    const replayButton = document.createElement('button');
+    replayButton.textContent = 'Rejouer la bonne réponse';
+    replayButton.style.backgroundColor = 'yellow';
+    replayButton.style.color = 'black';
+    replayButton.addEventListener('click', () => {
+        playSingleNoteThenTriad(currentNotes, firstNotePlayed);
+    });
+    
+    const continueButton = document.createElement('button');
+    continueButton.textContent = 'Continuer';
+    continueButton.style.backgroundColor = 'blue';
+    continueButton.style.color = 'white';
+    continueButton.addEventListener('click', () => {
+        document.getElementById('next-question').style.display = 'block';
+        nextQuestion();
+    });
+    
+    optionsDiv.appendChild(correctAnswerDisplay);
+    optionsDiv.appendChild(replayButton);
+    optionsDiv.appendChild(continueButton);
+}
+
+    
     function restartTest() {
         document.getElementById('game').style.display = 'none';
         startGame();
@@ -386,12 +420,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 validationMessage.textContent = 'Correcte !';
                 validationMessage.style.color = 'green';
                 correctAnswers++;
+                questionCount++;
+                setTimeout(nextQuestion, 2000);
             } else {
+                freezeScreenOnError(); // Empêche la question de changer automatiquement
                 validationMessage.textContent = `Incorrect, la bonne réponse était ${correctAnswer}.`;
                 validationMessage.style.color = 'red';
             }
-            questionCount++;
-            setTimeout(nextQuestion, 2000);
+            
         });
 
         const replayButton = document.createElement('button');
@@ -426,4 +462,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 return '';
         }
     }
+
+    function freezeScreenOnError() {
+        document.getElementById('next-question').style.display = 'none';
+        const optionsDiv = document.getElementById('options');
+        optionsDiv.innerHTML = ''; 
+        
+        const correctAnswerDisplay = document.createElement('p');
+        correctAnswerDisplay.textContent = `Bonne réponse : ${correctAnswer}`;
+        correctAnswerDisplay.style.color = 'blue';
+        correctAnswerDisplay.style.fontWeight = 'bold';
+        optionsDiv.appendChild(correctAnswerDisplay);
+        
+        const replayButton = document.createElement('button');
+        replayButton.textContent = 'Rejouer la bonne réponse';
+        replayButton.style.backgroundColor = 'yellow';
+        replayButton.style.color = 'black';
+        replayButton.addEventListener('click', () => {
+            playSingleNoteThenTriad(currentNotes, firstNotePlayed);
+        });
+        
+        const continueButton = document.createElement('button');
+        continueButton.textContent = 'Continuer';
+        continueButton.style.backgroundColor = 'blue';
+        continueButton.style.color = 'white';
+        continueButton.addEventListener('click', () => {
+            document.getElementById('next-question').style.display = 'block';
+            nextQuestion();
+        });
+        
+        optionsDiv.appendChild(correctAnswerDisplay);
+        optionsDiv.appendChild(replayButton);
+        optionsDiv.appendChild(continueButton);
+    }
+    
 });
