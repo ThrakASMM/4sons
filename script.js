@@ -286,6 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (interval1 === 3 && interval2 === 3 && interval3 === 2) {
             triadType = '7';
             inversion = 'R1';
+            fundamental = note4.slice(0, -1);
         } else if (interval1 === 3 && interval2 === 4 && interval3 === 2) {
             triadType = '-7b5';
             inversion = 'R1';
@@ -305,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (interval1 === 3 && interval2 === 2 && interval3 === 4) {
             triadType = '7';
             inversion = 'R2';
+            fundamental = note3.slice(0, -1);
         } else if (interval1 === 4 && interval2 === 2 && interval3 === 3) {
             triadType = '-7b5';
             inversion = 'R2';
@@ -324,6 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (interval1 === 2 && interval2 === 4 && interval3 === 3) {
             triadType = '7';
             inversion = 'R3';
+            fundamental = note2.slice(0, -1);
         } else if (interval1 === 2 && interval2 === 3 && interval3 === 3) {
             triadType = '-7b5';
             inversion = 'R3';
